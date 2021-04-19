@@ -1,4 +1,4 @@
-<br># Ga144_wire_node-</br>
+<h1># Ga144_wire_node-</h1>
 <p><strong>GA144  18  X  8  nodes , trouve le chemin entre un node de depart et arrivee </strong></p>
 <p> exemple :   node_Depart = "402" ,  node_Arrivee = "708" </p>
 <p> list_nodes_occupe = ['705', '505', '704', '608'] </p>
@@ -24,4 +24,4 @@
 <p> wire south east </p>
 <p> -*****************- </p>
 
-<h1> sur la figure1 : en rouge nodes occupes et le chemin , en bleu les nodes du chemin , en vert les nodes libres</h1>
+<br> sur la figure1 : en rouge nodes occupes et le chemin , en bleu les nodes du chemin , en vert les nodes libres</br>
