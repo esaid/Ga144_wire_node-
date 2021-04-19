@@ -24,3 +24,4 @@
 <p> wire south east </p>
 <p> -*****************- </p>
 
+<h1> sur la figure1 : en rouge nodes occupes et le chemin , en bleu les nodes du chemin , en vert les nodes libres</h1>
