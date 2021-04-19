@@ -34,13 +34,42 @@ node = ["000", "001", "002", "003", "004", "005", "006", "007", "008", "009", "0
 
 # retrouve la cle du dictionnaire dicLabels en fonction de la valeur
 def get_key(val):
+    """ trouve le correspondance entre le node et sa representation
+     - retrouve la cle du dictionnaire dicLabels en fonction de la valeur
+    :param string val
+    :return: string key
+    >>> get_key('600')
+    (6, 0)
+    >>> get_key('511')
+    (5, 11)
+    >>> get_key('417')
+    (4, 17)
+    """
     for key, value in dicLabels.items():
         if val == value:
             return key
 
 
 def wirecode(node_Depart, node_Arrivee, list_nodes_occupe):
-
+    """ donne le code des nodes en fonction du node de depart , d'arrivee et des nodes occupes
+    :param string node_Depart , le node de depart
+    :param string node_Arrivee , le node d'arrivee
+    :param list list_nodes_occupe , pour les eviter
+    :return: string wire , le code des nodes pour gerer les wire
+    >>> print(wirecode('600' ,'708' , ['705', '601', '704'] ).strip())
+    node 501,603,604,605,606,607
+    wire west east
+    node 708
+    south a!
+    node 600
+    south a!
+    node 502,608
+    wire west north
+    node 602
+    wire south east
+    node 500
+    wire north east
+    """
     # GA144  18  X  8  nodes
 
     # graphe 2D
@@ -137,6 +166,20 @@ def wirecode(node_Depart, node_Arrivee, list_nodes_occupe):
 def direction(d, a):
     # d[x,y] depart
     # a[x1,y1] arrivee
+    """
+
+    :param d: tuple node_depart , sous la forme (6,0)
+    :param a: tuple node_arrivee , sous la forme (7,8)
+    :return: string direction_ , exemple west east
+    >>> direction((6,1),(6,2))
+    'west east'
+    >>> direction((6,1),(6,0))
+    'east west'
+    >>> direction((5,1),(6,1))
+    'south north'
+    >>> direction((6,1),(5,1))
+    'north south'
+    """
     direction_ = ''
     x = d[0]
     y = d[1]
@@ -171,6 +214,15 @@ def direction(d, a):
 
 
 def direction_intersection(a, b):
+    """
+    :param string a: west east , north south
+    :param string b: west east
+    :return: west east , west east
+    >>> direction_intersection('west east' , 'west east')
+    'west east'
+    >>> direction_intersection('north south' , 'west east')
+    'north east'
+    """
     if b == "":
         b = a
     # trouve la direction entre 2 nodes
@@ -191,7 +243,7 @@ def direction_intersection(a, b):
     return intersection
 
 
-"""
+
 node_Depart = "600"
 node_Arrivee = "708"
 list_nodes_occupe = ['705', '601', '704']
@@ -201,4 +253,3 @@ print("les nodes occupes " , list_nodes_occupe)
 
 print("le code pour les liaisons wire : ")
 print(wirecode(node_Depart, node_Arrivee, list_nodes_occupe))
-"""
