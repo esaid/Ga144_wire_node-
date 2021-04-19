@@ -1,17 +1,26 @@
-# 7 Juin 2020
+# 09/04/2021
 # GA144  18  X  8  nodes
 # trouve le chemin entre un node de depart et arrivee
+# et permet d eviter les nodes occupees
+# genere le code wire pour la liaison entre les nodes
+# visualise le chemin
 
 import matplotlib.pyplot as plt
 import networkx as nx
-import sys
+
+node_Depart = "600"
+node_Arrivee = "708"
+list_nodes_occupe = ['705' ,'505' , '704' , '608']
 
 plot = True  # dessin du chemin True ou False
-node_Depart = "402"
-node_Arrivee = "708"
-list_nodes_occupe = ['705', '505', '704', '608']
+
+
 print("le node de depart : ", node_Depart)
 print("le node d'arrivee : ", node_Arrivee)
+
+
+
+
 # GA144  18  X  8  nodes
 x = 18
 y = 8
@@ -62,7 +71,9 @@ for i in range (len(list_nodes_occupe)):
 # dessin des nodes du GA144
 # on retourne la position pos
 flipped_pos = {node: (x,-y) for (node, (x,y)) in pos.items()}
-nx.draw_networkx(G, pos=flipped_pos,  labels=labels ,with_labels=True, font_size=15 , font_color='b' , node_color='g', edge_color='y', width=10.0,  node_size=55)
+# node en rouge si occupes :    node_color='r'
+nx.draw_networkx(G, pos=flipped_pos,  labels=labels ,with_labels=True, font_size=15 , font_color='b' , node_color='r', edge_color='y', width=10.0,  node_size=50)
+
 
 # remove les nodes occupes
 for l in list_nodes_occupe:
@@ -75,14 +86,15 @@ print("Le chemin sera alors : ",s )
 
 # dessin du chemin d'apres s
 red_edges = list(zip(s, s[1:]))
-# If the node is in the shortest path, set it to blue
+
+# If the node is in the shortest path, set it to blue else in green :  node_color=node_col
 node_col = ['g' if not node in s else 'b' for node in G.nodes()]
 # If the edge is in the shortest path set it to red
-edge_col = ['y' if not edge in red_edges else 'red' for edge in G.edges()]
-width_col = [10.0 if not edge in red_edges else 3.0 for edge in G.edges()]
+edge_col = ['y' if not edge in red_edges else 'r' for edge in G.edges()]
+width_col = [10.0 if not edge in red_edges else 5.0 for edge in G.edges()]
 # Draw the nodes
-nx.draw_networkx(G, pos=flipped_pos , node_color=node_col, labels=labels, with_labels=True, font_size=15, font_color='b',
-                 edge_color=edge_col, width=width_col,  node_size=55)
+nx.draw_networkx(G, pos=flipped_pos , node_color=node_col, labels=labels, with_labels=True, font_size=15, font_color='b',edge_color=edge_col, width=width_col,  node_size=65)
+
 # on montre le dessin si plot est a True
 if plot:
     plt.show()
@@ -153,7 +165,14 @@ def direction_intersection(a,b):
     # on retourne alors la direction
     return intersection
 
-l = len(s)-1
+# permet de retirer le code du node de depart
+# s = s[1:]
+s.append(s[-1]) # recopie le dernier element de la liste
+#  print(s)
+l = len(s)-1 # l = longueur de la liste -1
+
+
+
 for i in range(l):
 
     r = direction(s[i], s[i+1]) # renvoi la direction entre le node et le node suivant
@@ -168,18 +187,35 @@ for i in range(l):
         # pour le premier node
         dicoWire[r].append(dicLabels.get(s[i]))
 
-    #print(dicoWire)
-    #print (dicLabels.get(node), r) # node correspondant
+    #  print(dicoWire)
+
 
 wire = ""
 
+
 for key, values in dicoWire.items():
-    #print (key,values)
+    #  print (key,values)
+    #  print (len(values))
 
     if values:
         # mettre les nodes dans l'ordre
         values.sort()
-        wire = wire + "node " + ','.join(values) + "\nwire " + str(key) + "\n"
 
+        if node_Depart in values:
+            values.remove(node_Depart)  # enleve le node_Depart de la liste
+            wire = wire + "node " + node_Depart + "\n" + str(key).split()[1] + " a!\n"  # code specifique
+        if node_Arrivee in values:
+            values.remove(node_Arrivee)  # enleve le node_Depart de la liste
+            wire = wire + "node " + node_Arrivee + "\n" + str(key).split()[0] + " a!\n" # code specifique
+        if values:
+            wire = wire + "node " + ','.join(values) + "\nwire " + str(key) + "\n"
+
+# wire contient le code
+
+
+
+print("-*****************-")
+print("le code wire ")
 print(wire)
+print("-*****************-")
 
