@@ -9,13 +9,18 @@
 <p> le node : (5, 5) est occupe  </p>
 <p> le node : (7, 4) est occupe  </p>
 <p> le node : (6, 8) est occupe  </p>
-<p> Le chemin sera alors :  [(4, 2), (4, 3), (4, 4), (4, 5), (4, 6), (4, 7), (5, 7), (6, 7), (7, 7), (7, 8)]  </p>
-<p> node 402,403,404,405,406  </p>
-<p> wire west east  </p>
-<p> node 507,607 </p>
-<p> wire south north  </p>
-<p> node 407  </p>
-<p> wire west north  </p>
-<p> node 707  </p>
-<p> wire south east  </p>
-</p>
+<p> Le chemin sera alors :  [(6, 0), (6, 1), (6, 2), (6, 3), (6, 4), (6, 5), (6, 6), (6, 7), (7, 7), (7, 8)]  </p>
+<p> -*****************- </p>
+<p> le code wire  </p>
+<p> node 600 </p>
+<p> east a! </p>
+<p> node 708 </p>
+<p> west a! </p>
+<p> node 601,602,603,604,605,606 </p>
+<p> wire west east </p>
+<p> node 607 </p>
+<p> wire west north </p>
+<p> node 707 </p>
+<p> wire south east </p>
+<p> -*****************- </p>
+
