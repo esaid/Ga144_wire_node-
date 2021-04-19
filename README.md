@@ -25,3 +25,9 @@
 <p> -*****************- </p>
 
 <br> sur la figure1 : en rouge nodes occupes et le chemin , en bleu les nodes du chemin , en vert les nodes libres</br>
+
+<h1># wire.py </h1>
+<p> fichier qui peut etre importe depuis un autre programme python </p>
+<p> exemple :   </p>
+<p>from wire import wirecode, node </p>
+
