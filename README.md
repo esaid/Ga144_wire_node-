@@ -1,4 +1,4 @@
-<h1># Ga144_wire_node-</h1>
+<h1># Ga144_wire.py  programme pour visualiser le chemin </h1>
 <p><strong>GA144  18  X  8  nodes , trouve le chemin entre un node de depart et arrivee </strong></p>
 <p> exemple :   node_Depart = "402" ,  node_Arrivee = "708" </p>
 <p> list_nodes_occupe = ['705', '505', '704', '608'] </p>
